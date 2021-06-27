@@ -18,10 +18,9 @@ app.set('views',templatePath);
 app.use(express.static(staticPath));
 hbs.registerPartials(partialsPath);
 
-/* template engine route */
-app.use("/",(req,res)=>{
-    res.render("default");
-})
+/* routes */
+const defaultroutes = require("./routes/defaultroutes");
+app.use("/",defaultroutes);
 
 /* listening to the server */
 app.listen(port,()=>{
