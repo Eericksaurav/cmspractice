@@ -1,0 +1,18 @@
+{
+  "name": "mycms",
+  "version": "1.0.0",
+  "description": "this is vlog cms",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "author": "saurav rijal",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "hbs": "^4.1.2",
+    "mongoose": "^5.12.14"
+  }
+}
