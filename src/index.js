@@ -22,7 +22,7 @@ hbs.registerPartials(partialsPath);
 const defaultroutes = require("./routes/defaultroutes");
 const adminroutes = require("./routes/adminroutes");
 app.use("/",defaultroutes);
-app.use("/",adminroutes);
+app.use("/admin",adminroutes);
 
 /* listening to the server */
 app.listen(port,()=>{

@@ -3,7 +3,7 @@ const router = express.Router();
 const adminCont = require("../../controllers/adminCont");
 
 
-router.route("/admin")
+router.route("/")
     .get(adminCont.admin)
 
 
