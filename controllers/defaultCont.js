@@ -2,10 +2,16 @@ module.exports = {
     default : (req,res)=>{
         res.render('default')
     },
-    login : (req,res)=>{
+    loginGet : (req,res)=>{
         res.render('login')
     },
-    register : (req,res)=>{
+    loginPost : (req,res)=>{
+        res.send("sucessfully submitted the data");
+    },
+    registerGet : (req,res)=>{
         res.render('register')
+    },
+    registerPost : (req,res)=>{
+        res.send("registered sucessfully")
     }
 };
