@@ -3,19 +3,33 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const hbs = require("hbs");
-const {port} = require("../config/configuration")
+const {port, globalVariables} = require("../config/configuration")
+const flash = require("flash");
+const session = require("express-session")
 require("./database/conn");
-
 
 /* initializing the paths */
 const templatePath = path.join(__dirname,'../template/views');
 const partialsPath = path.join(__dirname,'../template/partials');
 const staticPath = path.join(__dirname,"../public");
 
+/* configure express */
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+app.use(express.static(staticPath));
+
+/* flash and session */
+app.use(session({
+    secret:'anysecret',
+    saveUninitialized:true,
+    resave:true
+}));
+app.use(flash());
+app.use(globalVariables);
+
 /* setting the view engine for dynamic page content */
 app.set('view engine','hbs');
 app.set('views',templatePath);
-app.use(express.static(staticPath));
 hbs.registerPartials(partialsPath);
 
 /* routes */

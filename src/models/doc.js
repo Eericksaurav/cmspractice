@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Detail = mongoose.model("Detail",{    
+const Post = mongoose.model("Post",{    
     title:{
         type:String,
         required:true
@@ -17,4 +17,4 @@ const Detail = mongoose.model("Detail",{
         default:Date.now()
     }
 })
-module.exports = Detail;
+module.exports = Post;
