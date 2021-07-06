@@ -3,9 +3,10 @@ const path = require("path");
 const express = require("express");
 const app = express();
 const hbs = require("hbs");
-const {port, globalVariables} = require("../config/configuration")
+const {port, globalVariables} = require("../config/configuration");
 const flash = require("flash");
-const session = require("express-session")
+const session = require("express-session");
+const bodyParser = require("body-parser");
 require("./database/conn");
 
 /* initializing the paths */
@@ -14,8 +15,8 @@ const partialsPath = path.join(__dirname,'../template/partials');
 const staticPath = path.join(__dirname,"../public");
 
 /* configure express */
-app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 app.use(express.static(staticPath));
 
 /* flash and session */

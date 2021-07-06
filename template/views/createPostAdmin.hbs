@@ -5,7 +5,7 @@
   <!-- Navigation-->
     {{> admintopnav }}
 
-  <div class="content-wrapper">
+  <div class="content-wrapper"> 
     {{> adminbody }}
     <!-- /.container-fluid-->
     <!-- /.content-wrapper-->
@@ -15,7 +15,7 @@
     
     <div class="row p-4">
         <div class="col-md-10">
-            <form action="/admin/posts/create" method="post" enctype="multipart/form-data">
+            <form action="/admin/posts" method="post" enctype="multipart/form-data">
                 
                 <div class="form-group">
                     <label for="title">Title</label>
@@ -56,7 +56,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="description">Content</label>
+                    <label for="description">Description</label>
                     <textarea name="description" id="description" class="form-control" placeholder="Enter your content here" rows="10"></textarea>
                 </div>
                 

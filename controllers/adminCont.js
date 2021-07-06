@@ -8,16 +8,21 @@ module.exports= {
         res.send("All posts")
     },
     submitPosts : async(req,res)=>{
-        const new_post = new Post({
-            title : req.body.title,
-            status : req.body.status,
-            description : req.body.description,
-            creationdate : req.body.creationdate
-        });
-        const see = await new_post.save();
-        console.log(see);
-        res.flash("success-message","Post created sucessfully")
-        res.render('admin/posts');
+        try {
+            const newPost = new Post({
+                title : req.body.title,
+                status : req.body.status,
+                description : req.body.description,
+                creationdate : req.body.creationdate
+            });
+            const Posted = await newPost.save();        
+            console.log(Posted);
+            // res.send(Posted);
+            // res.flash("success-message","Post created sucessfully")
+            res.render('admin/posts');
+        } catch (error) {
+            res.status(400).send(error)
+        }
     },
     createPosts:(req,res)=>{
         res.render("createPostAdmin");

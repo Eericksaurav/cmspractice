@@ -4,11 +4,12 @@ const adminCont = require("../../controllers/adminCont");
 
 
 router.route("/")
-    .get(adminCont.admin)
+    .get(adminCont.admin);
 router.route("/posts")
-    .get(adminCont.getPosts)
-    .post(adminCont.submitPosts)
+    .get(adminCont.getPosts);
+
 router.route("/posts/create")
-    .get(adminCont.createPosts);
+    .get(adminCont.createPosts)
+    .post(adminCont.submitPosts);
 
 module.exports = router;
