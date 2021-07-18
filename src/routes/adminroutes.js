@@ -10,6 +10,6 @@ router.route("/posts")
 
 router.route("/posts/create")
     .get(adminCont.createPosts)
-    .post(adminCont.submitPosts);
+    .post(adminCont.submitPost);
 
 module.exports = router;

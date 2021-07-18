@@ -5,23 +5,23 @@ module.exports= {
         res.render("admin");
     },
     getPosts:(req,res)=>{
-        res.send("All posts")
+        res.send("Posted");
     },
-    submitPosts : async(req,res)=>{
+    submitPost : async(req,res)=>{
         try {
-            const newPost = new Post({
+            console.log((req.body.title));
+            const postdata = new Post({
                 title : req.body.title,
-                status : req.body.status,
-                description : req.body.description,
-                creationdate : req.body.creationdate
+                status: req.body.status,
+                description : req.body.description
             });
-            const Posted = await newPost.save();        
-            console.log(Posted);
-            // res.send(Posted);
+            const posted = await postdata.save();
+            console.log("postdata",postdata);
+            console.log(posted);
             // res.flash("success-message","Post created sucessfully")
-            res.render('admin/posts');
+            res.status(201).send(posted);
         } catch (error) {
-            res.status(400).send(error)
+            res.status(400).send(error);
         }
     },
     createPosts:(req,res)=>{
