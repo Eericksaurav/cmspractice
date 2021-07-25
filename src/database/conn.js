@@ -10,4 +10,3 @@ mongoose.connect(mongoDBurl,{
    })
 .then(()=> console.log("connection sucessful on the database"))
 .catch((error)=> console.log(error));
-

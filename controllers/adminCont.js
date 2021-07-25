@@ -1,4 +1,4 @@
-const Post = require("../src/models/doc").Post;
+const {Post} = require("../src/models/doc")
 
 module.exports= {
     admin: (req,res)=>{
@@ -9,17 +9,16 @@ module.exports= {
     },
     submitPost : async(req,res)=>{
         try {
-            console.log((req.body.title));
-            const postdata = new Post({
+            // console.log(req.body);
+            let postdata = new Post({
                 title : req.body.title,
                 status: req.body.status,
                 description : req.body.description
             });
+            console.log("postdata == ",postdata);
             const posted = await postdata.save();
-            console.log("postdata",postdata);
-            console.log(posted);
-            // res.flash("success-message","Post created sucessfully")
-            res.status(201).send(posted);
+            // req.flash("success-message","Post created sucessfully")
+            res.status(201).redirect("/admin/posts");
         } catch (error) {
             res.status(400).send(error);
         }

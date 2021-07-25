@@ -6,15 +6,11 @@ const Post = mongoose.model("Post",{
     },
     status:{
         type:String,
-        default:"public"
+        default:"private"
     },
     description:{
         type:String,
         required:true
-    },
-    creationdate:{
-        type:Date,
-        default:Date.now()
     }
 })
 module.exports = Post;
