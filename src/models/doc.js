@@ -13,4 +13,4 @@ const Post = mongoose.model("Post",{
         required:true
     }
 })
-module.exports = Post;
+module.exports = {Post};

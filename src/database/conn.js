@@ -6,7 +6,8 @@ mongoose.connect(mongoDBurl,{
     useNewUrlParser:true,
     useCreateIndex:true,
     useUnifiedTopology:true,
-    useFindAndModify:false   
-   })
-.then(()=> console.log("connection sucessful on the database"))
-.catch((error)=> console.log(error));
+    useFindAndModify:false
+   });
+mongoose.connection
+   .once("open",()=> console.log("Database is connected"))
+   .on("error",(error) =>console.log("error is: ",error));
