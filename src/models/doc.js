@@ -8,6 +8,10 @@ const Post = mongoose.model("Post",{
         type:String,
         default:"private"
     },
+    allowComments:{
+        type:Boolean,
+        default:false
+    },
     description:{
         type:String,
         required:true

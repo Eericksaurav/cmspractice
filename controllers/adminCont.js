@@ -6,8 +6,18 @@ module.exports= {
     admin: (req,res)=>{
         res.render("admin");
     },
-    getPosts:(req,res)=>{
-        res.render("postedmessage");
+    getPosts: async(req,res)=>{
+        // Post.find().then(main=>{
+        //     res.render("postedmessage",{posts:main});
+        // })
+        try {
+            const postsFind = await Post.find()
+            // console.log("ab==",posts);   
+            res.render("postedmessage", {posts:postsFind});
+        } catch (error) {
+            console.log("err==",error);
+            res.status(500).send(error);
+        }
     },
     submitPost : async(req,res)=>{
         try{
@@ -18,9 +28,9 @@ module.exports= {
             });
             // console.log("postdata == ",postdata);
             await postdata.save();
-            req.flash("success-message","Post created sucessfully")
+            req.flash("success-message","New post created sucessfully.")
             res.status(201).redirect("/admin/posts");
-        } catch (error) {
+        } catch (error) {  
             res.status(500).send(error)
         }
     },
@@ -28,3 +38,4 @@ module.exports= {
         res.render("createPostAdmin");
     }
 }
+
