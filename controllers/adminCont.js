@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const {Post} = require("../src/models/doc");
+const {Post} = require("../src/models/Postmodel");
 require("../src/routes/adminroutes");
 
 module.exports= {
@@ -15,7 +15,7 @@ module.exports= {
             // console.log("ab==",posts);   
             res.render("postedmessage", {posts:postsFind});
         } catch (error) {
-            console.log("err==",error);
+            console.log("err==",error); 
             res.status(500).send(error);
         }
     },
