@@ -6,6 +6,7 @@ const hbs = require("hbs");
 const {port, globalVariables} = require("../config/configuration");
 const flash = require("connect-flash");
 const session = require("express-session");
+const methodOverride = require('method-override');
 
 require("./database/conn");
 
@@ -35,6 +36,9 @@ app.use(globalVariables);
 app.set('view engine','hbs');
 app.set('views',templatePath);
 hbs.registerPartials(partialsPath);
+
+/* Method Override Middleware*/
+app.use(methodOverride('newMethod'));
 
 /* routes */
 const defaultroutes = require("./routes/defaultroutes");

@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const { Category } = require('./Categorymodel');
-const Post = mongoose.model("Post",{    
+const Post = mongoose.model("Post",{
     title:{
         type:String,
         required:true
@@ -24,6 +24,16 @@ const Post = mongoose.model("Post",{
     category:{
         type:mongoose.Schema.Types.ObjectId,
         ref:"Category"
-    }
+    },
+    comments:[
+        {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"Comment"
+        }
+    ]
 })
 module.exports = {Post};
+
+
+
+

@@ -7,9 +7,6 @@ module.exports= {
         res.render("admin");
     },
     getPosts: async(req,res)=>{
-        // Post.find().then(main=>{
-        //     res.render("postedmessage",{posts:main});
-        // })
         try {
             const postsFind = await Post.find()
             // console.log("ab==",posts);   
@@ -20,22 +17,44 @@ module.exports= {
         }
     },
     submitPost : async(req,res)=>{
+        const commentsAllowed = req.body.allowComments? true: false;
         try{
             const postdata = new Post({
                 title : req.body.title,
                 status : req.body.status,
-                description : req.body.description
+                description : req.body.description,
+                allowComments : commentsAllowed
             });
-            // console.log("postdata == ",postdata);
             await postdata.save();
             req.flash("success-message","New post created sucessfully.")
             res.status(201).redirect("/admin/posts");
-        } catch (error) {  
+        } catch (error) {
             res.status(500).send(error)
         }
     },
     createPosts:(req,res)=>{
         res.render("createPostAdmin");
+    },
+    editPost: async(req,res) => {
+        try {
+        const id = req.params.id;
+        const data = await Post.findById(id);
+        res.render("editposts",{posts:data})
+        } catch (error) {
+            console.log("Error == ",error);
+            res.send(error);
+        }
+    },
+    deletePost: async(req,res)=>{
+        const id = req.body.id
+        try{
+            const deleteData = await Post.findByIdAndDelete(id);
+            console.log(deleteData);
+            res.flash("success-message",`The post ${deleteData.id}hasbeen deleted successfully.`);
+            res.status(201).redirect("/admin/posts");
+        }catch(error){
+            console.log(error);
+            res.send(error);
+        }
     }
 }
-
