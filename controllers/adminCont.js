@@ -46,14 +46,12 @@ module.exports= {
         }
     },
     deletePost: async(req,res)=>{
-        const id = req.body.id
+        const id = req.params.id
         try{
             const deleteData = await Post.findByIdAndDelete(id);
-            console.log(deleteData);
-            res.flash("success-message",`The post ${deleteData.id}hasbeen deleted successfully.`);
+            req.flash("success-message",`The post ${deleteData.title} has been deleted successfully.`);
             res.status(201).redirect("/admin/posts");
         }catch(error){
-            console.log(error);
             res.send(error);
         }
     }
