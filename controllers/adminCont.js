@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const {Post} = require("../src/models/Postmodel");
+const {Category} = require("../src/models/Categorymodel");
 require("../src/routes/adminroutes");
 
 module.exports= {
@@ -54,5 +55,13 @@ module.exports= {
         }catch(error){
             res.send(error);
         }
+    },
+    getCategory: async(req,res)=>{
+       try {
+        const Catedata = await Category.find();
+        res.render("displayCategory",{categories : Catedata});
+       } catch (error) {
+        res.status(201).send(error);
+       }
     }
 }

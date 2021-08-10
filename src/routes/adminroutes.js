@@ -19,4 +19,7 @@ router.route("/posts/edit/:id")
 router.route("/posts/delete/:id")
     .delete(adminCont.deletePost);
 
+router.route("/category")
+    .get(adminCont.getCategory);
+
 module.exports = router;
