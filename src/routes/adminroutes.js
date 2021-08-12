@@ -5,7 +5,8 @@ const adminCont = require("../../controllers/adminCont");
 
 router.route("/")
     .get(adminCont.admin);
-
+    
+ /*Post Route */
 router.route("/posts")
     .get(adminCont.getPosts);
 
@@ -19,7 +20,13 @@ router.route("/posts/edit/:id")
 router.route("/posts/delete/:id")
     .delete(adminCont.deletePost);
 
+    /* Category route */
 router.route("/category")
-    .get(adminCont.getCategory);
+    .get(adminCont.getCategory)
+    .post(adminCont.postCategory);
+
+router.route("/category/delete/:id")
+    .delete(adminCont.deleteCategory);    
+
 
 module.exports = router;
