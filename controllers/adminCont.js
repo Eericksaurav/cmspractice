@@ -9,7 +9,7 @@ module.exports= {
     },
     getPosts: async(req,res)=>{
         try {
-            const postsFind = await Post.find()
+            const postsFind = await Post.find().populate("category");
             // console.log("ab==",posts);
             res.render("postedmessage", {posts:postsFind});
         } catch (error){
@@ -24,17 +24,23 @@ module.exports= {
                 title : req.body.title,
                 status : req.body.status,
                 description : req.body.description,
+                category : req.body.category,
                 allowComments : commentsAllowed
             });
             await postdata.save();
-            req.flash("success-message","New post created sucessfully.")
+            req.flash("success-message",`New post ${postdata.title} created sucessfully`)
             res.status(201).redirect("/admin/posts");
         } catch (error) {
             res.status(500).send(error)
         }
     },
-    createPosts:(req,res)=>{
-        res.render("createPostAdmin");
+    createPosts:async(req,res)=>{
+        try {
+            const data = await Category.find(); 
+            res.render("createPostAdmin",{categories:data});
+        } catch (error) {
+            res.status(500).send(error)
+        }
     },
     editPost: async(req,res) => {
         try {
