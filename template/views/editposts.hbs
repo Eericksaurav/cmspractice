@@ -39,12 +39,13 @@
                 <div class="form-group">
                     <label for="category">Category</label>
                     <select name="category" id="category" class="form-control">
+                        {{#select post.category}}
                         {{#each categories}}
                             <option value="{{_id}}">{{title}}</option>    
                         {{/each}}     
                     </select>
-                </div>
-                
+                </div>  
+
                 <div class="form-check ml-3">
                     <label for="allowComments">
                         <input type="checkbox" class="form-check-input" id="allowComments" name="allowComments">
