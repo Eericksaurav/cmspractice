@@ -42,11 +42,22 @@ module.exports= {
             res.status(500).send(error)
         }
     },
-    editPost: async(req,res) => {
+    editPost: (req,res) => {
         try {
         const id = req.params.id;
-        const data = await Post.findById(id);
-        res.render("editposts",{posts:data})
+        // const cate = await Category.find()
+        // console.log(cate);
+        // const cate = await Post.Category.find()
+        // const data = await Post.findById(id)
+        Post.findById(id)
+            .then(data => {
+
+                Category.find().then(cats => {
+                    console.log("cats==",cats)
+                    res.render('editposts', {post: data, categories: cats});
+                });
+            })
+        // res.render("editposts",{posts:data, categories:cate});
         } catch (error) {
             console.log("Error == ",error);
             res.send(error);
