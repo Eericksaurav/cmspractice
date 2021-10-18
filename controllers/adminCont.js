@@ -46,7 +46,6 @@ module.exports= {
         try {
         const id = req.params.id;
         const cate = await Category.find()
-        console.log(cate);
         const data = await Post.findById(id)
         res.render("editposts",{posts:data, categories:cate});
         } catch (error) {
