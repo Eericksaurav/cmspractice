@@ -45,12 +45,55 @@ module.exports= {
     editPost: async (req,res) => {
         try {
         const id = req.params.id;
-        const cate = await Category.find()
-        const data = await Post.findById(id)
+        const cate = await Category.find();
+        const data = await Post.findById(id);
         res.render("editposts",{posts:data, categories:cate});
         } catch (error) {
             console.log("Error == ",error);
             res.send(error);
+        }
+    },
+    // editPostUpdateRoute: (req, res) => {
+    //     const commentsAllowed = req.body.allowComments ? true : false;
+
+
+    //     const id = req.params.id;
+
+    //     Post.findById(id)
+    //         .then(post => {
+
+    //             post.title = req.body.title;
+    //             post.status = req.body.status;
+    //             post.allowComments = req.body.allowComments;
+    //             post.description = req.body.description;
+    //             post.category = req.body.category;
+
+
+    //             post.save().then(updatePost => {
+    //                 req.flash('success-message', `The Post ${updatePost.title} has been updated.`);
+    //                 res.redirect('/admin/posts');
+
+    //             });
+    //         });
+
+    // },
+    editPostUpdateRoute: async(req,res)=>{
+        try {
+            const id =req.params.id;
+            const data = await Post.findById(id).then(post=>{
+                post.title = req.body.title;
+                post.status = req.body.status;
+                post.allowComments = req.body.allowComments;
+                post.description = req.body.description;
+                post.category = req.body.category;
+
+                post.save().then(updatePost => {
+                    req.flash('success-message', `The Post ${updatePost.title} has been updated.`);
+                    res.redirect('/admin/posts');
+                });
+            });
+        } catch (error) {
+            res.send("err ==",error);
         }
     },
     deletePost: async(req,res)=>{
@@ -93,6 +136,22 @@ module.exports= {
         } catch (error) {
             console.log(error);
             res.send(error);
+        }
+    },
+    updateCategoryRoute: async(req,res)=>{
+        try {
+            const cateId =req.params.id
+            const newTitle = req.body.name
+            if (newTitle) {
+                await Category.findById(cateId).then(category=>{
+                    category.title = newTitle;
+                    category.save().then(updated=>{
+                        res.status(200).json({url:"/admin/category"});
+                    });
+                })
+            }
+        } catch (error) {
+            
         }
     }
 }

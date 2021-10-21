@@ -15,7 +15,8 @@ router.route("/posts/create")
     .post(adminCont.submitPost);
 
 router.route("/posts/edit/:id")
-    .get(adminCont.editPost);
+    .get(adminCont.editPost)
+    .put(adminCont.editPostUpdateRoute);
 
 router.route("/posts/delete/:id")
     .delete(adminCont.deletePost);
